@@ -36,4 +36,6 @@ The Linux script will do the following:
 ## Still, be careful about automating this; there have been more and more reports about Linux repositories being 
 ## compromised with malware, such as npm and AUR.
 
-## This is the current extent of this script. Thanks for reading!
+## This is the current extent of this script. There are some improvements to be made, like automatically pushing ^C after
+top runs, pushing the borg password in the script to avoid having to manually enter it several times, and encrypting
+traffic sent from your local drive to a remote network location. Thanks for reading!
