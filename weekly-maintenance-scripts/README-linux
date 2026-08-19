@@ -1,6 +1,6 @@
 ## NOTE: This script is still a work in progress, use with caution.
 
-The Linux script will do the following:
+## The Linux script will do the following:
 ## -Create a /var/log/topdiagnostics directory, along with several txt files
 ## in this folder for data storage
 ## -Install the borgbackup utility
