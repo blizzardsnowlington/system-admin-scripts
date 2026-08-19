@@ -1,4 +1,5 @@
-## NOTE: This script is still a work in progress, use with caution.
+## NOTE: This script is still a work in progress, use with caution. Don't make a habit of downloading random scripts
+## online. This is for my personal use, I just want to share it.
 
 ## The Linux script will do the following:
 ## -Create a /var/log/topdiagnostics directory, along with several txt files
