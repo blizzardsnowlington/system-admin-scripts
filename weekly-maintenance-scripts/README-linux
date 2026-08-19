@@ -1,0 +1,39 @@
+## NOTE: This project is still a work in progress, use with caution.
+
+The Linux script will do the following:
+## -Create a /var/log/topdiagnostics directory, along with several txt files
+## in this folder for data storage
+## -Install the borgbackup utility
+## -Make a /backup directory, then create a borgbackup repository in this /backup directory. 
+## It will require you to enter a password for the repository.
+## These backups were left in a local directory for testing purposes. If you have a local USB or network storage,
+## change the location to that for better data resilience.
+## The above steps are to set up the script, but they will run every week before the maintenance tasks.
+## If you would prefer for this to not happen, delete all lines above line 11 in the script and it should run the same.
+
+## Next, the script will run top to gather diagnostic information about the host computer,
+## and send it to dailytopdump.txt. 
+## This currently requires a ^C to cancel top. 
+## Then, grep is used to send timestamp information to the /var/log/topdiagnostics/topdiagnostics.txt file.
+## dd is run to gather information about disk write speeds. The stderr output is sent to the 
+## /var/log/topdiagnostics/topdiagnostics.txt file.
+## The top output from dailytopdump.txt is then grep'd into the /var/log/topdiagnostics/topdiagnostics.txt file,
+## showing information about number of tasks, CPU usage, and memory usage.
+## This information should allow you to measure trends in your hardware by scrolling down in the topdiagnostics.txt file.
+
+## After this, a full backup of the system is run using borgbackup, sent to the repository by default at
+## /backup/borgbackup. 
+## Then, the script greps for any backup in the repository that does not match the 
+## current date and time, and sends it to expired_backups. Then, any backups listed in the expired_backups file
+## will be deleted. 
+## This is a measure to save storage space on desktop systems. However, if you would rather save multiple backups, you
+## can change the grep -v "$(date +'%m%d%Y')" command to grep -v "$(date +'%m') to delete backups every month, or
+## grep -v "$(date +'%Y') to delete backups every year.
+
+## Next, the system will update using the respective package manager for your operating system. This is done
+## intentionally after the backup. In case of a faulty package update that damages or bricks your computer, you would
+## have an up-to-date remote backup.
+## Still, be careful about automating this; there have been more and more reports about Linux repositories being 
+## compromised with malware, such as npm and AUR.
+
+## This is the current extent of this script. Thanks for reading!
